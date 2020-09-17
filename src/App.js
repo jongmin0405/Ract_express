@@ -1,53 +1,41 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import TodoList from "./components/TodoList";
-import './App.css';
-
+import "./App.css";
 
 class App extends Component {
-
-    constructor(props) {
-        super(props);
-        this.state = {
-            username:null
-        };
-       this.state = { items: [], text: '' };
-       this.handleChange = this.handleChange.bind(this);
-       this.handleSubmit = this.handleSubmit.bind(this);
-    }
+  constructor(props) {
+    super(props);
+    this.state = {
+      username: null,
+    };
+    this.state = { items: [], text: "" };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
 
   render() {
-    const {username} = this.state;
+    const { username } = this.state;
     return (
-        <div className="App" >
-          <header className="App-header">
-            {username ? `Hello ${username}` : 'Hello World'}
-          </header>
-        
+      <div className="App">
+        <header className="App-header">
+          {username ? `Hello ${username}` : "Hello World"}
+        </header>
+
         <h3>TODO</h3>
         <TodoList items={this.state.items} />
         <form onSubmit={this.handleSubmit}>
           <p>
-            <label htmlFor="new-todo">
-            What needs to be done?
-          </label>
+            <label htmlFor="new-todo">What needs to be done?</label>
           </p>
           <input
             id="new-todo"
             onChange={this.handleChange}
             value={this.state.text}
           />
-          <button>
-            Add #{this.state.items.length + 1}
-          </button>
+          <button>Add #{this.state.items.length + 1}</button>
         </form>
-
-        
-        </div>
-
-
-        
+      </div>
     );
-   
   }
   handleChange(e) {
     this.setState({ text: e.target.value });
@@ -60,32 +48,19 @@ class App extends Component {
     }
     const newItem = {
       text: this.state.text,
-      id: Date.now()
+      id: Date.now(),
     };
-    this.setState(state => ({
+    this.setState((state) => ({
       items: state.items.concat(newItem),
-      text: ''
+      text: "",
     }));
   }
 
-  
-
-  
   componentDidMount() {
-    fetch('/api/group')
-        .then(res=>res.json())
-        .then(data=>this.setState({username:data.username}));
-   }
-
-
+    fetch("/api/group")
+      .then((res) => res.json())
+      .then((data) => this.setState({ username: data.username }));
+  }
 }
 
-
-
 export default App;
-
-
-
-
-
-
