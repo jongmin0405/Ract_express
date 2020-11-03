@@ -1,44 +1,55 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 
-class EventPractice extends Component {
-  state = {
+const EventPractice = () => {
+  const [form, setForm] = useState({
+    username: "",
     message: "",
+  });
+  const { username, message } = form;
+  const onChange = (e) => {
+   /// console.log(e);
+    const nextForm = {
+      ...form,
+      [e.target.name]: e.target.value,
+    };
+    return setForm(nextForm);
   };
 
-  constructor(props) {
-    super(props);
-    this.handleChang = this.handleChang.bind(this);
-    this.handleClick = this.handleClick.bind(this);
-  }
-
-  handleChang(e) {
-    this.setState({
-      message: e.target.value,
-    });
-  }
-
-  handleClick() {
-    alert(this.state.message);
-    this.setState({
+  const onClick = () => {
+    alert(username + ":" + message);
+    setForm({
+      username: "",
       message: "",
     });
-  }
+  };
 
-  render() {
-    return (
-      <div>
-        <h1>입력하시오</h1>
-        <input
-          type="text"
-          name="message"
-          placeholder="아무거나 입력"
-          value={this.state.message}
-          onChange={this.handleChang}
-        ></input>
-        <button onClick={this.handleClick}>확인</button>
-      </div>
-    );
-  }
-}
+  const onKeyPress = (e) => {
+    if (e.key === "Enter") {
+      onClick();
+    }
+  };
+
+  return (
+    <div>
+      <h1>연습</h1>
+      <input
+        type="text"
+        name="username"
+        placeholder="사용자명"
+        value={username}
+        onChange={onChange}
+      />
+      <input
+        type="text"
+        name="message"
+        placeholder="메세지"
+        value={message}
+        onChange={onChange}
+        onKeyPress={onKeyPress}
+      />
+      <button onClick={onClick}>확인</button>
+    </div>
+  );
+};
 
 export default EventPractice;
