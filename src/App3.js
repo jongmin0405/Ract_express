@@ -15,10 +15,7 @@ class App extends Component {
       color : '#000006'
     }
 
-//test
-
-
-  handleClick=()=>{
+    handleClick=()=>{
     this.setState({
       color:getRandomColor()
     });
