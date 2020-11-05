@@ -15,11 +15,8 @@ class App extends Component {
       color : '#000006'
     }
 
-<<<<<<< HEAD
-    //$$sksksk
-=======
 //test
->>>>>>> bd5f37254b59f13d06313c1c65e35e8fc2b15736
+
 
   handleClick=()=>{
     this.setState({
